@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes');
 var path = require('path');
 var errorHandler = require('errorhandler');
+var express = require('express');
 
 module.exports = function(app){
 	app.use(logger('dev'));
