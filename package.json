@@ -1,0 +1,22 @@
+{
+  "name": "passport_practice",
+  "version": "1.0.0",
+  "description": "quick application to practice and understand passport.js. Allows a user to log in and view an internal page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u001b[2~\u0016\u001b[2~\u001b[2~\u001b[2~\u0016https://github.com/bragtown/passport_practice.git"
+  },
+  "author": "Jordan Braginton and Teancum Besendorfer",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.1.18",
+    "mongoose": "^4.4.16",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
