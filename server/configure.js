@@ -7,7 +7,8 @@ var errorHandler = require('errorhandler');
 var express = require('express');
 var cookieparser = require('cookieparser');
 var passport = require('passport');
-var confPassport = require('./config/passport');
+var confPassport = require('../config/passport');
+var session = require('express-session');
 
 module.exports = function(app){
 	app.use(logger('dev'));
