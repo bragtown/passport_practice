@@ -9,7 +9,7 @@ var UserSchema = new Schema({
 });
 //generates a hash
 UserSchema.methods.generateHash = function(password){
-	return bcrypt.compareSync(password,bcrypt.genSaltSync(8), null)
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 }
 // checks if password is valid
 UserSchema.methods.validPassword = function(password) {

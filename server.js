@@ -2,7 +2,7 @@ var express = require('express')  //require express
 var config = require('./server/configure')  //require all other modules and use them
 var app = express();  //use express. All its functions available via app
 var mongoose = require('mongoose');
-app.set('port', process.env.PORT || 3600);  //listen on the port
+app.set('port', process.env.PORT || 4500);  //listen on the port
 app.set('views', __dirname + '/views'); 
 app = config(app);
 

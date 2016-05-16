@@ -1,13 +1,21 @@
+path = require('path')
 module.exports = {
 	getLoginPage: function(req,res){
-		res.send('this is the login page')
+		res.sendFile(path.join(__dirname, '/../views/login.html'));
 	},
 	logout: function(req,res){
 		req.logout();
-		res.redirect('/signup');
+		res.redirect('/login');
 	},
-	signup: function(req,res){
-		res.send('signup');
+	signup: function(passport,req,res){
+		console.log("in signup");
+		passport.authenticate(
+		'local-signup', 
+		{
+			successRedirect : '/',
+			failureRedirect : '/login',
+			failureFlash : true
+		});
 	}
 
 }
