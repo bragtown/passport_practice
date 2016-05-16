@@ -25,7 +25,7 @@ module.exports = function(passport){
     			passReqToCallback: true
     		},
     		function(req, email, password, done){
-    			User.findOne({'local.email':email}, function(err, usedr){
+    			User.findOne({'local.email':email}, function(err, user){
     				//iff err
     				if(err)
     					return done(err);
@@ -33,7 +33,7 @@ module.exports = function(passport){
     				if(!user)
     					return done(null, false, req.flash('loginMessage', 'no user found'));
 					//if invalid password
-					if(!user.validatePassword(password))
+					if(!user.validPassword(password))
 						return done(null, false, req.flash('loginMessage', 'Wrong Password!'));
 
 					return done(null,user);	
@@ -68,6 +68,8 @@ module.exports = function(passport){
 						else{
 							console.log('in else');
 							var newUser = new User();
+							newUser.fName = req.body.fName;
+							newUser.lName = req.body.lName;
 							newUser.local.email = email;
 							newUser.local.password = newUser.generateHash(password);
 							newUser.save(function(err){
