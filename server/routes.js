@@ -22,7 +22,17 @@ module.exports.initialize = function(app, router, passport){
 			console.log('logged in');
 			res.redirect('/');
 		}
-	)
+	);
+
+	app.get('/auth/lds', passport.authenticate('lds.io'));
+	app.get(
+		'/auth/lds/callback',
+		passport.authenticate('lds.io', {failureRedirect:'/login'}),
+		function(req,res){
+			console.log('lds logged in');
+			res.redirect('/')
+		}
+	);
 
 	app.use('/', router);
 }

@@ -7,6 +7,10 @@ var UserSchema = new Schema({
 	local:{
 		email:String,
 		password:String
+	},
+	lds:{
+		id:String,
+		token:String
 	}
 });
 //generates a hash

@@ -1,5 +1,7 @@
 var LocalStrategy = require('passport-local');
 var User = require('../models/user');
+var configAuth = require('./auth');
+var LDSStrategy = require('passport-lds-io').Strategy;
 module.exports = function(passport){
     // required for persistent login sessions
     // passport needs ability to serialize and unserialize users out of session
@@ -15,6 +17,36 @@ module.exports = function(passport){
             done(err, user);
         });
     });
+
+    passport.use('lds.io', new LDSStrategy(
+    	{
+        	clientID        : configAuth.ldsAuth.clientID,
+        	clientSecret    : configAuth.ldsAuth.clientSecret,
+        	callbackURL     : configAuth.ldsAuth.callbackURL
+    	},
+    	function(token, refreshToken, profile, done){
+    		process.nextTick(function(){
+    			user.findOne({'lds.id':profile.id}, function(err,user){
+    				if(err)
+    					return done(err);
+    				if(user)
+    					return done(null, user);
+    				else{
+    					var newUser = new User();
+    					console.log(profile);
+    					newUser.lds.id = profile.id;
+    					newUser.lds.token = token;
+    					newUser.save(function(err){
+    						if(err)
+    							throw err;
+    						return done(null, newUser);
+    					});
+
+    				}
+    			});
+    		});
+    	}
+    ));
 
     passport.use(
     	'local-login',
